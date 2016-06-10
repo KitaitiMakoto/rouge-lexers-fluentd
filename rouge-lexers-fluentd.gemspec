@@ -30,6 +30,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_runtime_dependency 'rouge', '~> 1.11'
+  gem.add_development_dependency 'test-unit', '~> 3'
+  gem.add_development_dependency 'test-unit-notify', '~> 1'
   gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'rake', '~> 10.0'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
