@@ -29,6 +29,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
+  gem.add_runtime_dependency 'rouge', '~> 1.11'
   gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'rake', '~> 10.0'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
