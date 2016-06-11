@@ -1,0 +1,468 @@
+---
+- - Comment
+  - "# Receive events from 24224/tcp"
+- - Text
+  - "\n"
+- - Comment
+  - "# This is used by log forwarding and the fluent-cat command"
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - forward
+- - Text
+  - "\n  "
+- - Name.Class
+  - port
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - '24224'
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Comment
+  - '# http://this.host:9880/myapp.access?json={"event":"data"}'
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - http
+- - Text
+  - "\n  "
+- - Name.Class
+  - port
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - '9880'
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - tail
+- - Text
+  - "\n  "
+- - Name.Builtin
+  - "@label"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - "@SYSTEM"
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - source
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - label
+- - Literal.String.Regex
+  - " @SYSTEM"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Punctuation
+  - "<"
+- - Name.Label
+  - filter
+- - Literal.String.Regex
+  - " var.log.middleware.**"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "    "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - grep
+- - Text
+  - "\n    "
+- - Comment
+  - "# ..."
+- - Text
+  - "\n  "
+- - Punctuation
+  - "</"
+- - Name.Label
+  - filter
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Punctuation
+  - "<"
+- - Name.Label
+  - match
+- - Literal.String.Regex
+  - " **"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "    "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - s3
+- - Text
+  - "\n    "
+- - Comment
+  - "# ..."
+- - Text
+  - "\n  "
+- - Punctuation
+  - "</"
+- - Name.Label
+  - match
+- - Punctuation
+  - |-
+    >
+    </
+- - Name.Label
+  - label
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - filter
+- - Literal.String.Regex
+  - " myapp.access"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - record_transformer
+- - Text
+  - "\n  "
+- - Punctuation
+  - "<"
+- - Name.Label
+  - record
+- - Punctuation
+  - ">\n"
+- - Text
+  - "    "
+- - Name.Class
+  - host_param
+- - Text
+  - " "
+- - Literal.String.Double
+  - "\""
+- - Literal.String.Symbol
+  - "#{Socket.gethostname}"
+- - Literal.String.Double
+  - "\""
+- - Text
+  - "\n  "
+- - Punctuation
+  - "</"
+- - Name.Label
+  - record
+- - Punctuation
+  - |-
+    >
+    </
+- - Name.Label
+  - filter
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Comment
+  - '# Match events tagged with "myapp.access" and'
+- - Text
+  - "\n"
+- - Comment
+  - "# store them to /var/log/fluent/access.%Y-%m-%d"
+- - Text
+  - "\n"
+- - Comment
+  - "# Of course, you can control how you partition your data"
+- - Text
+  - "\n"
+- - Comment
+  - "# with the time_slice_format option."
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - match
+- - Literal.String.Regex
+  - " myapp.access"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - file
+- - Text
+  - "\n  "
+- - Name.Class
+  - path
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - "/var/log/fluent/access"
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - match
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Comment
+  - "# Include config files in the ./config.d directory"
+- - Text
+  - "\n"
+- - Name.Builtin
+  - "@include"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - config.d/*.conf
+- - Text
+  - "\n\n"
+- - Name.Class
+  - array_param
+- - Text
+  - " "
+- - Punctuation
+  - "["
+- - Text
+  - "\n  "
+- - Literal.String.Symbol
+  - '"a",'
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - '"b"'
+- - Text
+  - "\n"
+- - Punctuation
+  - "]"
+- - Text
+  - "\n"
+- - Name.Class
+  - hash_param
+- - Text
+  - " "
+- - Punctuation
+  - "{"
+- - Text
+  - "\n  "
+- - Literal.String.Symbol
+  - '"k":"v",'
+- - Text
+  - "\n  "
+- - Literal.String.Symbol
+  - '"k1":10'
+- - Text
+  - "\n"
+- - Punctuation
+  - "}"
+- - Text
+  - "\n\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - match
+- - Literal.String.Regex
+  - " **"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - mail
+- - Text
+  - "\n  "
+- - Name.Class
+  - subject
+- - Text
+  - " "
+- - Literal.String.Double
+  - "\""
+- - Literal.String.Symbol
+  - "[CRITICAL] foo's alert system"
+- - Literal.String.Double
+  - "\""
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - match
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Punctuation
+  - "<"
+- - Name.Label
+  - match
+- - Literal.String.Regex
+  - " tag"
+- - Punctuation
+  - ">\n"
+- - Text
+  - "  "
+- - Name.Builtin
+  - "@type"
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - map
+- - Text
+  - "\n  "
+- - Name.Class
+  - map
+- - Text
+  - " "
+- - Literal.String.Single
+  - "'"
+- - Literal.String.Symbol
+  - '[["code." + tag, time, { "code" => record["code"].to_i}], ["time." + tag, time,
+    { "time" => record["time"].to_i}]]'
+- - Literal.String.Single
+  - "'"
+- - Text
+  - "\n  "
+- - Name.Class
+  - multi
+- - Text
+  - " "
+- - Literal.String.Symbol
+  - 'true'
+- - Text
+  - "\n"
+- - Punctuation
+  - "</"
+- - Name.Label
+  - match
+- - Punctuation
+  - ">\n"
+- - Text
+  - "\n"
+- - Name.Class
+  - str_param
+- - Text
+  - " "
+- - Literal.String.Double
+  - "\""
+- - Literal.String.Symbol
+  - foo
+- - Literal.String.Double
+  - "\""
+- - Text
+  - "\n\n"
+- - Name.Class
+  - host_param
+- - Text
+  - " "
+- - Literal.String.Double
+  - "\""
+- - Literal.String.Symbol
+  - "#{Socket.gethostname}"
+- - Literal.String.Double
+  - "\""
+- - Text
+  - " "
+- - Comment
+  - "# host_param is actual hostname like `webserver1`."
+- - Text
+  - "\n\n"
+- - Name.Class
+  - str_param
+- - Text
+  - " "
+- - Literal.String.Double
+  - "\""
+- - Literal.String.Symbol
+  - foo\nbar
+- - Literal.String.Double
+  - "\""
+- - Text
+  - " "
+- - Comment
+  - "# \\n is interpreted as actual LF character"
+- - Text
+  - "\n"
