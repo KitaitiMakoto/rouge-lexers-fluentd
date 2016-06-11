@@ -22,5 +22,5 @@ Rake::TestTask.new do |test|
 end
 
 require 'yard'
-YARD::Rake::YardocTask.new  
+YARD::Rake::YardocTask.new
 task :doc => :yard
