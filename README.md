@@ -33,6 +33,17 @@ Rouge lexer for fluentd configuration files
 
     $ gem install rouge-lexers-fluentd
 
+## Todo
+
+* Lex array values
+* Lex hash values
+* Lex embedded Ruby code
+* Recognize labels
+* Recognize tag with separator dots
+* Lex quotes in quoted strings correctly
+* Lex closing brackets in array correctly
+* Lex closing braces in hash correctly
+
 ## Copyright
 
 Copyright (c) 2016 KITAITI Makoto
