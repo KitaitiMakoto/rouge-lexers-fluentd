@@ -16,6 +16,17 @@
   @label @SYSTEM
 </source>
 
+<label @SYSTEM>
+  <filter var.log.middleware.**>
+    @type grep
+    # ...
+  </filter>
+  <match **>
+    @type s3
+    # ...
+  </match>
+</label>
+
 <filter myapp.access>
   @type record_transformer
   <record>
