@@ -10,11 +10,24 @@ Rouge lexer for fluentd configuration files
 
 ## Features
 
+* Guesses Fluentd configuration files from filename
+* Lexes Fluentd configuration files
+
 ## Examples
 
     require 'rouge/lexers/fluentd'
+    
+    config = File.read("path/to/fluent.conf")
+    lexer = Rouge::Lexer.find("fluentd")
+    tokens = lexer.lex(config)
+    terminal_formatter = Rouge::Formatters::Terminal256.new
+    html_formatter = Rouge::Formatters::HTML.new
+    File.write 'path/to/output.html', html_formatter.format(tokens)
+    puts terminal_formatter.format(tokens)
 
 ## Requirements
+
+* [Rouge][]
 
 ## Install
 
@@ -25,3 +38,5 @@ Rouge lexer for fluentd configuration files
 Copyright (c) 2016 KITAITI Makoto
 
 See {file:LICENSE.txt} for details.
+
+[Rouge]: http://rouge.jneen.net/
