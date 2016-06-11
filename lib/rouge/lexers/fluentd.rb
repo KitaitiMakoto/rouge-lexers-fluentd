@@ -1,4 +1,4 @@
-require 'rouge/lexers/fluentd/version'
+require "rouge"
 
 module Rouge
   module Lexers

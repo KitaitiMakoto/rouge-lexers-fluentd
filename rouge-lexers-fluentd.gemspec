@@ -2,11 +2,10 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rouge/lexers/fluentd/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rouge-lexers-fluentd"
-  gem.version       = Rouge::Lexers::Fluentd::VERSION
+  gem.version       = "0.1.0"
   gem.summary       = %q{Rouge lexer for fluentd configuration files}
   gem.description   = %q{Rouge lexer for fluentd configuration files}
   gem.license       = "MIT"
